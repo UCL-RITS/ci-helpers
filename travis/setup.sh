@@ -12,14 +12,14 @@ usage(){
 [[ $# -eq 0 ]] && usage
 
 ########### Setup directories
-
+ci_path=${HOME}/ci-helpers
 ## Travis will create directory automatically if setup as cached, if not it
 ## needs to be created
-if [ ! -d ${HOME}/ci-helpers ]; then
-    mkdir -p ${HOME}/ci-helpers
+if [ ! -d ${ci_path} ]; then
+    mkdir -p ${ci_path}
 fi
 
-
+ci_travis="ci-helpers/travis"
 ### different arguments for different tools:
 # - openmpi
 # - spack
@@ -27,13 +27,13 @@ fi
 for value in "$@"; do
     case ${value} in
         openmpi)
-            source ci-helpers/travis/install_mpi.sh openmpi
+            source ${ci_travis}/install_mpi.sh openmpi
             ;;
         mpich)
-            source ci-helpers/travis/install_mpi.sh mpich
+            source ${ci_travis}/install_mpi.sh mpich
             ;;
         spack)
-            source ci-helpers/travis/install_spack.sh
+            source ${ci_travis}/install_spack.sh
             ;;
         *)
             usage
