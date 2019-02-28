@@ -27,10 +27,10 @@ fi
 for value in "$@"; do
     case ${value} in
         openmpi)
-            bash ci-helpers/travis/install_mpi openmpi
+            bash ci-helpers/travis/install_mpi.sh openmpi
             ;;
         mpich)
-            bash ci-helpers/travis/install_mpi mpich
+            bash ci-helpers/travis/install_mpi.sh mpich
             ;;
         spack)
             install_spack
