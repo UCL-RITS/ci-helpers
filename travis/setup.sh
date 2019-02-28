@@ -33,7 +33,7 @@ for value in "$@"; do
             source ci-helpers/travis/install_mpi.sh mpich
             ;;
         spack)
-            install_spack
+            source ci-helpers/travis/install_spack.sh
             ;;
         *)
             usage
