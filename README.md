@@ -21,8 +21,13 @@ If you want to take advantage of caching what this installs, then you would
 also need to add such information on your `.travis.yml` file:
 
 ```yaml
-
 cache:
   directories:
-    - $HOME/ci-helpers
+    - $HOME/ci-helpers/spack
+    - $HOME/ci-helpers/openmpi
+    - $HOME/ci-helpers/mpich
 ```
+
+You don't need all these caches, only the ones you are going to use, but if
+you want to have builds with openmpi and others with mpich, then you want to
+have these caches separated so you don't overwrite them on different runs.
