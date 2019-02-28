@@ -28,7 +28,7 @@ function build_mpi {
     echo "  - CC: ${CC}"
     echo "  - CXX: ${CXX}"
 
-    if [ $FC == '' ]; then
+    if [ -z "${FC}" ]; then
         MPICH_EXTRA='--disable-fortran'
     fi
 
