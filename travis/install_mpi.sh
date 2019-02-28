@@ -3,9 +3,7 @@
 function latest_compiler {
     # Call it with the compiler you need to get the latest version of:
     # latest_compiler gcc
-
-    dpkg --list | grep compiler | grep "$1"
-    compiler_version=$(dpkg --list |                   # dpkg --list provides the list of packages installed on a debian based system
+    local compiler_version=$(dpkg --list |                   # dpkg --list provides the list of packages installed on a debian based system
                            grep compiler |             # We filter only compilers and the one passed via the argument
                            grep "$1" |
                            sed -e 's/[0-9].*://' |     # Removed the `4:` from versions numbers output
@@ -14,6 +12,7 @@ function latest_compiler {
                            sort -r|                    # Sort them in reverse order and take only the first one.
                            head -n1 |
                            awk '{print $2}')           # Finally print the value of the command name.
+    echo ${compiler_version}
 }
 
 
