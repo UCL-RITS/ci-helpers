@@ -4,6 +4,7 @@ function latest_compiler {
     # Call it with the compiler you need to get the latest version of:
     # latest_compiler gcc
 
+    dpkg --list | grep compiler | grep "$1"
     compiler_version=$(dpkg --list |                   # dpkg --list provides the list of packages installed on a debian based system
                            grep compiler |             # We filter only compilers and the one passed via the argument
                            grep "$1" |
