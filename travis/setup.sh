@@ -24,14 +24,13 @@ fi
 # - openmpi
 # - spack
 # - mpich
-
 for value in "$@"; do
     case ${value} in
         openmpi)
-            install_openmpi
+            bash ci-helpers/travis/install_mpi openmpi
             ;;
         mpich)
-            install_mpich
+            bash ci-helpers/travis/install_mpi mpich
             ;;
         spack)
             install_spack
