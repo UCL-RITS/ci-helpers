@@ -76,3 +76,6 @@ then
     build_mpi $1
     popd
 fi
+
+export LD_LIBRARY_PATH=$HOME/ci-helpers/${1}/lib:$LD_LIBRARY_PATH;
+export PATH=$HOME/ci-helpers/${1}/bin:$PATH;
