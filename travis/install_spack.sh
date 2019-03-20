@@ -1,17 +1,17 @@
 #!/bin/bash -xe
 
-ci_path=${HOME}/ci-helpers
-spack_path=${ci_path}/spack
+ci_path="${HOME}/ci-helpers"
+export SPACK_ROOT="${ci_path}/spack"
 
 pushd ${ci_path}
 
 # Are we using the cache directory or it's empty?
-if [ ! -f ${spack_path}/README.md ]; then
-    rm -rf ${spack_path}
+if [ ! -f "${SPACK_ROOT}/README.md" ]; then
+    rm -rf "${SPACK_ROOT}"
     git clone https://github.com/spack/spack.git
 fi
 
-. spack/share/spack/setup-env.sh
+. "$SPACK_ROOT/share/spack/setup-env.sh"
 
 
 while sleep 540 ; do echo "=========== spack installation is taking more than 9m - pinging travis =========="; done & # cfits may take long to download
@@ -28,12 +28,11 @@ kill $WAIT_PID
 popd
 
 #load modules after installation
-if [ $TRAVIS_OS_NAME = osx ]; then
+if [ "$TRAVIS_OS_NAME" = osx ]; then
     . $(brew --prefix modules)/init/bash;
 fi
 
-# Load what we need
-export SPACK_ROOT=${spack_path}
-. $SPACK_ROOT/share/spack/setup-env.sh
+# Load again setup to be able to load the module
+. "$SPACK_ROOT/share/spack/setup-env.sh"
 
 spack load openmpi@3.0.0
